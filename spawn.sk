@@ -1,0 +1,63 @@
+command /spawn:
+	trigger:
+		set {_x} to x-coords of player
+		set {_z} to z-coords of player
+		loop 3 times:
+			set {_x-check} to x-coords of player
+			set {_z-check} to z-coords of player
+			if {_x-check} is {_x}:
+				if {_z-check} is {_z}:
+					send action bar "&7Teleporting in % 4 - loop-number%"
+					play sound "ENTITY_EXPERIENCE_ORB_PICKUP" with volume 100 with pitch 1 at player for player
+				wait 1 second
+			else:
+				send action bar "&7Canceled" to player
+				stop
+		send action bar "&7Teleported to spawn" to player
+		teleport the player to {spawn}
+		stop
+
+command /setspawn:
+	trigger:
+		if player has the permission "setspawn.setspawn":
+			set {spawn} to location of player
+			send "&6You set the spawn" to player
+
+command /tptospawn [<offlineplayer>]:
+	trigger:
+		if player has the permission "tp.spawn":
+			teleport the arg-1 to {spawn}		
+
+command /tpspawn:
+	trigger:
+		if player has the permission "tp.spawn":
+			teleport player to {spawn}
+
+on death:
+    teleport victim to {spawn}
+
+
+command /pvp:
+	trigger:
+		set {_x} to x-coords of player
+		set {_z} to z-coords of player
+		loop 3 times:
+			set {_x-check} to x-coords of player
+			set {_z-check} to z-coords of player
+			if {_x-check} is {_x}:
+				if {_z-check} is {_z}:
+					send action bar "&aTeleporting in % 4 - loop-number%"
+					play sound "ENTITY_EXPERIENCE_ORB_PICKUP" with volume 100 with pitch 1 at player for player
+				wait 1 second
+			else:
+				send action bar "&aCanceled" to player
+				stop
+		send action bar "&aTeleported to pvp" to player
+		teleport the player to {pvp}
+		stop
+
+command /setpvp:
+	trigger:
+		if player has the permission "setspawn.setspawn":
+			set {pvp} to location of player
+			send "&6You set pvp" to player
